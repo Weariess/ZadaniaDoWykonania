@@ -69,5 +69,37 @@ app.get("/remove/:nazwa", function(req,res){
     } )
 })
 
+app.get("/updatetrue/:nazwa",function(req,res){
+    const nazwa = req.params.nazwa
+
+    const sql = `UPDATE zadania SET czywykonane = 1 WHERE nazwa = "${nazwa}"`
+
+    con.query(sql, function(err, result, fields){
+        if(err){
+            console.log(err)
+            res.send("nie zmieniono")
+        }
+        else{
+            console.log("zmieniono")
+            res.send("zmieniono")
+        }
+    } )
+})
+app.get("/updatefalse/:nazwa",function(req,res){
+    const nazwa = req.params.nazwa
+
+    const sql = `UPDATE zadania SET czywykonane = 0 WHERE nazwa = "${nazwa}"`
+
+    con.query(sql, function(err, result, fields){
+        if(err){
+            console.log(err)
+            res.send("nie zmieniono")
+        }
+        else{
+            console.log("zmieniono")
+            res.send("zmieniono")
+        }
+    } )
+})
 
 app.listen(port)
