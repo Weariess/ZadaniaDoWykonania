@@ -1,4 +1,5 @@
-
+var tak = 0
+var nie = 0
 async function getData(){
     const data = await fetch(`http://localhost:3001/select`)
     const json = await data.json()
@@ -25,9 +26,11 @@ async function getData(){
         if(json[i].czywykonane==1){
             wykonanie.setAttribute("checked", "true")
             wykonanie.setAttribute("onchange", `zmiennafalse("${json[i].nazwa}")`)
+            tak = tak + 1
         }
         if(json[i].czywykonane!=1){
             wykonanie.setAttribute("onchange", `zmiennatrue("${json[i].nazwa}")`)
+            nie = nie + 1
         }
         div.appendChild(wykonanie)
 
