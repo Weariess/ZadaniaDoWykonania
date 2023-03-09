@@ -39,16 +39,35 @@ app.get("/add/:nazwa/:czywykonane/:termin", function (req, res){
     const czywykonane = req.params.czywykonane
     const termin = req.params.termin
 
-    const sql = `INSERT INTO zadania (nazwa, czywykonane, termin) VALUES ('${nazwa}','${czywykonane}','${termin}')`
+    const sql = `INSERT INTO zadania (nazwa,czywykonane,termin) VALUES ('${nazwa}','${czywykonane}','${termin}')`
     con.query(sql, function(err,results,fields){
         if(err){
             console.log(err)
             res.send("nie dodano")
         }
         else{
+            console.log("dodano zadanie")
             res.send("dodano")
         }
     })
 })
+
+
+app.get("/remove/:nazwa", function(req,res){
+    const nazwa = req.params.nazwa
+
+    const sql = `DELETE FROM zadania WHERE nazwa = "${nazwa}"`
+    con.query(sql, function(err, result, fields){
+        if(err){
+            console.log(err)
+            res.send("nie usunięto")
+        }
+        else{
+            console.log("usunięto")
+            res.send("usunięto")
+        }
+    } )
+})
+
 
 app.listen(port)
